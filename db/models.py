@@ -37,6 +37,10 @@ class AddressModel(Model):
         except AttributeError:
             ...
 
+    @staticmethod
+    def unload():
+        return AddressModel.select().where(AddressModel.status == 1).dicts()
+
     class Meta:
         database = database
 

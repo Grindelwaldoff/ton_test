@@ -15,6 +15,12 @@ celery -A contract_data_worker worker --loglevel=info
 python main.py
 ```
 
+для выгрузки сделан отдельный метод из файла unload.py
+при запуске которого будет выведена собранная информация в формате json
+```
+python unload.py
+```
+
 если какие-то проблемы с бд - ее можно пересоздать запусти отдельно models.py
 ```
 python db/models.py
