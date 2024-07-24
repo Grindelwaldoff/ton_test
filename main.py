@@ -16,7 +16,7 @@ async def handle_block(block: BlockIdExt):
         # сохраняем их в бд, вместе со смарт контрактом и полем статус = 0
         dest = transaction.in_msg.info.dest
         src = transaction.in_msg.info.src
-        print([dest,src])
+        print([dest, src])
         AddressModel.insert_address(dest) if dest else ...
         AddressModel.insert_address(src) if src else ...
 
