@@ -11,6 +11,8 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+*.db-shm
+*.db-wal
 develop-eggs/
 dist/
 downloads/
