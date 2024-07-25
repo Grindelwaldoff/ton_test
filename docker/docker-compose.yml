@@ -1,0 +1,18 @@
+version: '3.7'
+
+
+services:
+  redis:
+    image: redis:5-alpine
+
+  celery:
+    build: ../
+    command: celery -A contract_data_worker worker --loglevel=info
+    depends_on:
+      - redis
+
+  app:
+    build: ../
+    command: python main.py
+    depends_on:
+      - celery

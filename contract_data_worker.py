@@ -9,8 +9,8 @@ from db.models import AddressModel, database
 
 celery_app = Celery(
     "tasks",
-    broker="redis://localhost:6379/0",
-    backend="redis://localhost:6379/0",
+    broker="redis://redis:6379/0",
+    backend="redis://redis:6379/0",
 )
 
 ton_api = "https://toncenter.com/api/v3/account?address={address}"
@@ -21,8 +21,7 @@ def address_task():
     database.connect()
     while True:
         try:
-            addresses: AddressModel = AddressModel.filter(status=0)
-            for address in addresses:
+            for address in AddressModel.filter(status=0):
                 time.sleep(1)
                 response = requests.get(
                     ton_api.format(address=address.wallet_address)
@@ -30,8 +29,8 @@ def address_task():
                 data = response.json()
                 print(data)
                 if data.get("code") and data.get("data"):
-                    address.code = response.json().get("code")
-                    address.data = response.json().get("data")
+                    address.code = data.get("code")
+                    address.data = data.get("data")
                 address.status = True
                 address.update_dt = time.time()
                 address.save()
