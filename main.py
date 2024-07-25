@@ -19,6 +19,7 @@ async def handle_block(block: BlockIdExt):
         print([dest, src])
         AddressModel.insert_address(dest) if dest else ...
         AddressModel.insert_address(src) if src else ...
+        break
 
 
 client = LiteClient.from_mainnet_config(ls_i=0, trust_level=2, timeout=15)
